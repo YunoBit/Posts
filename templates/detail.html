@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+</head>
+<body>
+    <h1>{{ posts.title }}</h1>
+    <p>{{ posts.description }}</p>
+
+    <a href="{% url 'update' posts.pk %}">Edit</a>
+    <a href="{% url 'delete' posts.pk %}">Delete</a>
+    <a href="{% url 'index' %}">Back to Posts List</a>
+
+    <!-- Comments Section -->
+    <h2>Comments</h2>
+
+    <ul>
+        {% for comment in posts.comments.all %}
+        <li>
+            <p>{{ comment.text }}</p>
+            <a href="{% url 'com_update' comment.pk %}">Edit Comment</a>
+            <a href="{% url 'com_delete' comment.pk %}">Delete Comment</a>
+        </li>
+        {% empty %}
+        <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Comment Create Form -->
+    <h3>Add a Comment</h3>
+    <form method="post" action="{% url 'com_create' posts.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+</body>
+</html>

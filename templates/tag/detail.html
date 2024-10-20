@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Detail</title>
+</head>
+<body>
+    <h1>{{ tag.name }}</h1>
+    <p>Tag ID: {{ tag.id }}</p>
+    <a href="{% url 'tag_update' tag.id %}">Edit</a>
+    <a href="{% url 'tag_delete' tag.id %}">Delete</a>
+    <a href="{% url 'tag_index' %}">Back to Tags List</a>
+</body>
+</html>
